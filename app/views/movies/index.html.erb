@@ -1,7 +1,9 @@
 <% content_for :title, "Movie List" %>
 
 <% if current_user&.admin? %>
-  <%= link_to "Add New Movie", new_movie_path, class: "btn btn-info" %>
+  <%= link_to new_movie_path, class: "btn btn-info btn-sm" do %>
+    <i class="fas fa-video"></i> Add New Movie
+  <% end %>
 <% end %>
 
 <div class="row mt-4">
@@ -28,7 +30,9 @@
               <h5 class="card-title">Rating: <span class="badge badge-warning">4/5</span></h5>
 
               <p class="card-text">
-                <%= link_to "View Details", movie, class: "btn btn-primary btn-sm" %>
+                <%= link_to movie, class: "btn btn-primary btn-sm" do %>
+                  <i class="fas fa-film"></i> View Movie
+                <% end %>
               </p>
             </div>
           </div>

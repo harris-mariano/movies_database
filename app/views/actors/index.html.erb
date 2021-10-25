@@ -1,7 +1,9 @@
 <% content_for :title, "Actors List" %>
 
 <% if current_user&.admin? %>
-  <%= link_to "Add New Actor", new_actor_path, class: "btn btn-info btn-sm" %>
+  <%= link_to new_actor_path, class: "btn btn-info btn-sm" do %>
+    <i class="fas fa-user-plus"></i> Add New Actor
+  <% end %>
 <% end %>
 
 <div class="row mt-4">
@@ -14,7 +16,9 @@
             <%= link_to (image_tag actor.image.url(:medium), class: "card-img-top"), actor %>
             <div class="card-body">
               <h5 class="card-title"><%= link_to "#{actor.full_name}", actor %></h5>
-              <%= link_to "View Actor", actor, class: "btn btn-primary btn-sm mt-3" %>
+              <%= link_to actor, class: "btn btn-primary btn-sm mt-3" do %>
+                <i class="far fa-user"></i> View Actor
+              <% end %>
             </div>
           </div>
         </div>

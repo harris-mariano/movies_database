@@ -22,6 +22,11 @@
     <%= f.file_field :image, class: "form-control-file form-control-sm" %>
   </div>
 
-  <%= link_to "Back", movies_path, class: "btn btn-danger btn-sm" %>
-  <%= f.submit "Submit", class: "btn btn-primary float-right btn-sm" %>
+  <%= link_to :back, class: "btn btn-danger btn-sm" do %>
+    <i class="fas fa-long-arrow-alt-left"></i> Back
+  <% end %>
+
+  <%= f.button :submit, class: "btn btn-primary float-right btn-sm" do %>
+    <i class="fas fa-save"></i> Submit
+  <% end %>
 <% end %>
