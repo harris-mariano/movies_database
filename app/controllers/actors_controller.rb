@@ -50,6 +50,21 @@ class ActorsController < ApplicationController
     end
   end
 
+  def create_cast
+    @actor = Actor.find params[:actor_id]
+    @actor.casts.build(movie_id: params[:movie_id])
+
+    respond_to do |format|
+      if @actor.save
+        format.html { redirect_to @actor, notice: 'Actor was successfully added to this movie.' }
+        format.json { render :show, status: :created, location: @actor }
+      else
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: @actor.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_actor

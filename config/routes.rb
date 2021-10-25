@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :actors
-  resources :movies
   devise_for :users
+  resources :actors do
+    post :create_cast
+  end
+
+  resources :movies do
+    post :create_cast
+  end
 
   root 'movies#index', as: 'root'
 end
