@@ -1,17 +1,14 @@
 <div class="col-12 col-sm-4">
-  <!-- Search Start -->
-  <div class="card mb-4">
-    <h5 class="card-header">Search</h5>
-    <div class="card-body">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Movies" />
-        <div class="input-group-append">
-          <button class="btn btn-dark" type="button" id="button-addon2">Search</button>
-        </div>
+  <!-- Search Form -->
+  <%= search_form_for @q, html: { class: "mb-4" } do |f| %>
+    <div class="input-group">
+      <%= f.search_field :title_cont, class: "form-control", placeholder: "Search Movies" %>
+
+      <div class="input-group-append">
+        <%= f.submit 'Search', class: "btn btn-info" %>
       </div>
     </div>
-  </div>
-  <!-- Search End -->
+  <% end %>
 
   <!-- Top Movies -->
   <div class="card mb-4">
@@ -27,9 +24,8 @@
       <a href="#">View All</a>
     </div>
   </div>
-  <!-- End -->
 
-  <!-- Upcoming Movies -->
+  <!-- Recent Movie Comments -->
   <div class="card mb-4">
     <h5 class="card-header">Recent Movie Comments</h5>
     <ul class="list-group list-group-flush">
@@ -43,5 +39,4 @@
       <a href="#">View All</a>
     </div>
   </div>
-  <!-- End -->
 </div>
