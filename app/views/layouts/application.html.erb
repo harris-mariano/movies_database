@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MoviesDatabase</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <title>Movie Database</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_pack_tag 'application' %>
   </head>
-
   <body>
+  <!-- Navbar -->
+  <%= render 'layouts/navbar' %>
+
+  <!-- Content -->
+  <main class="container-fluid">
+    <h3 class="border-bottom pb-2 mt-3"><%= yield(:title) %></h3>
+    <% if notice %>
+      <%= render 'layouts/message' %>
+    <% end %>
+
     <%= yield %>
+  </main>
+
+  <!-- Footer -->
+  <%= render 'layouts/footer' %>
   </body>
 </html>
