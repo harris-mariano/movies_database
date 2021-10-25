@@ -1,0 +1,30 @@
+<% content_for :title, "#{@actor.full_name}" %>
+
+<div class="row mt-4">
+  <!-- Content -->
+  <div class="col-12 col-sm-8">
+    <p><%= image_tag @actor.image.url(:medium), class: "img-fluid" %></p>
+    <div class="movie-content">
+      <h5>Full Name: <small><%= @actor.full_name %></small></h5>
+
+      <% if current_user&.admin? %>
+        <%= link_to "Edit", edit_actor_path(@actor), class: 'btn btn-warning' %>
+        <%= button_to "Delete", @actor, class: "btn btn-danger", method: :delete, confirm: 'Are you sure?' %>
+      <% end %>
+
+      <hr/>
+      <h5 class="mt-3">Movies</h5>
+      <table class="table table-bordered">
+        <tr>
+          <td><a href="#"><img src="imgs/celebs/tom-cruise.jpg" width="100" /></a></td>
+          <td><a href="#">Title</a></td>
+          <td>Year</td>
+          <td>Genre</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <%= render 'layouts/sidebar' %>
+</div>

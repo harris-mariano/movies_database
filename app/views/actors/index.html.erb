@@ -1,0 +1,30 @@
+<% content_for :title, "Actors List" %>
+
+<% if current_user&.admin? %>
+  <%= link_to "Add New Actor", new_actor_path, class: "btn btn-info btn-sm" %>
+<% end %>
+
+<div class="row mt-4">
+  <div class="col-12 col-sm-8">
+    <div class="row">
+      <!-- Content -->
+      <% @actors.each do |actor| %>
+        <div class="col-6 col-sm-3 mb-2">
+          <div class="card">
+            <%= link_to (image_tag actor.image.url(:medium), class: "card-img-top"), actor %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to "#{actor.full_name}", actor %></h5>
+              <%= link_to "View Actor", actor, class: "btn btn-primary btn-sm mt-3" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Pagination -->
+    <%= paginate @actors, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  </div>
+
+  <!-- Sidebar -->
+  <%= render 'layouts/sidebar' %>
+</div>
