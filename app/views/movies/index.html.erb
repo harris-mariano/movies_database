@@ -1,0 +1,45 @@
+<% content_for :title, "Movie List" %>
+
+<% if current_user&.admin? %>
+  <%= link_to "Add New Movie", new_movie_path, class: "btn btn-info" %>
+<% end %>
+
+<div class="row mt-4">
+  <div class="col-12 col-sm-8">
+    <!-- Content -->
+    <% @movies.each do |movie| %>
+      <div class="card mb-4">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <%= link_to (image_tag movie.image.url(:medium), class: "card-img"), movie %>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= link_to "#{movie.title}", movie %>
+              </h5>
+
+              <p class="card-text"><%= movie.summary.truncate(200) %></p>
+
+              <h5 class="card-title">Release Year: <small><%= movie.release_year %></small></h5>
+
+              <h5 class="card-title">Director: <small><%= movie.director %></small></h5>
+
+              <h5 class="card-title">Rating: <span class="badge badge-warning">4/5</span></h5>
+
+              <p class="card-text">
+                <%= link_to "View Details", movie, class: "btn btn-primary btn-sm" %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Pagination -->
+    <%= paginate @movies, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  </div>
+
+  <!-- Right Sidebar -->
+  <%= render 'layouts/sidebar' %>
+</div>
