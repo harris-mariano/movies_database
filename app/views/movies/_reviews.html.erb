@@ -1,0 +1,20 @@
+<div class="card mt-4">
+  <h5 class="card-header">Reviews</h5>
+  <div class="card-body">
+    <% if @movie.reviews.any? %>
+      <% @movie.reviews.each_with_index do |review, index| %>
+        <% unless index.zero? %>
+          <hr/>
+        <% end %>
+
+        <blockquote class="blockquote">
+          <p class="mb-0"><%= review.comment %> <small class="float-right">Score: <%= review.score %></small></p>
+          <footer class="blockquote-footer"><%= review.user.full_name %></footer>
+        </blockquote>
+      <% end %>
+    <% else %>
+      <p>No reviews found</p>
+    <% end %>
+
+  </div>
+</div>

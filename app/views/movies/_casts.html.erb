@@ -1,0 +1,9 @@
+<h5 class="mt-3">Casts</h5>
+<table class="table table-bordered">
+  <% @movie.actors.each do |actor| %>
+    <tr>
+      <td><%= link_to (image_tag actor.image.url(:medium), width: '100'), actor %></td>
+      <td><%= link_to "#{actor.full_name}", actor %></td>
+    </tr>
+  <% end %>
+</table>

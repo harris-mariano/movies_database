@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :movies do
+    resources :reviews
     post :create_cast
   end
 
