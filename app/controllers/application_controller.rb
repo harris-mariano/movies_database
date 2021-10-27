@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :admin])
   end
+
+  def ensure_can_perform_action
+    redirect_back fallback_location: '/', notice: 'Unathorized to perform action' unless current_user&.admin?
+  end
 end

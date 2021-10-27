@@ -1,0 +1,47 @@
+<%# if user.errors.any? %>
+<!--  <div id="error_explanation" class="text-danger">-->
+<!--    <h2><%#= pluralize(user.errors.count, "error") %> prohibited this profile from being saved:</h2>-->
+
+<!--    <ul>-->
+      <%# user.errors.full_messages.each do |message| %>
+<!--        <li><%#= message %></li>-->
+      <%# end %>
+<!--    </ul>-->
+<!--  </div>-->
+<%# end %>
+
+<div class="container">
+  <h4 class="mb-3">Edit Profile</h4>
+  <%= form_with url: profile_path, model: user, method: :patch, class: "needs-validation" do |f| %>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= f.label :full_name %>
+        <%= f.text_field :full_name, class: "form-control form-control-sm" %>
+        <% if user.errors[:full_name].present? %>
+          <div class="text-danger">
+            Full name is required.
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "form-control form-control-sm", disabled: true, placeholder: "address@domain.com" %>
+        <div class="invalid-feedback">
+          Please enter a valid email address for shipping updates.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= f.label :image, "Profile Image" %>
+        <%= f.file_field :image, class: "form-control-file form-control-sm" %>
+      </div>
+    </div>
+
+    <hr class="mb-4">
+
+    <%= f.submit "Submit", class: "btn btn-primary btn-block mb-5" %>
+  <% end %>
+</div>
