@@ -34,6 +34,12 @@
                   <i class="fas fa-film"></i> View Movie
                 <% end %>
               </p>
+
+              <p class="card-text">
+                <%= button_to movie_add_to_favorites_path(movie), class: "btn btn-sm btn-success" do %>
+                  <i class="fas fa-heart"></i> Add to favorites
+                <% end %>
+              </p>
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-lg-8">
-      <h2>Details</h2>
+      <h3>User Details</h3>
       <p><strong>Full Name:</strong> <%= @user.full_name %></p>
       <p><strong>Email:</strong> <%= @user.email %></p>
       <% if current_user == @user || current_user.admin?%>
@@ -17,5 +17,23 @@
       <% end %>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-lg-6 offset-lg-4">
+      <h3>User Favorites</h3>
+
+      <ul class="list-group">
+        <% if @user.movies.blank? %>
+          No favorites found!
+        <% else %>
+          <% @user.movies.each do |movie| %>
+            <li class="list-group-item"><%= link_to movie.title, movie %><button class=" btn btn-success btn-sm float-right"><i class="fas fa-heart"></i></button></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+
 </div>
 

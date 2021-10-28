@@ -68,6 +68,21 @@ class MoviesController < ApplicationController
     end
   end
 
+  def add_to_favorites
+    @movie = Movie.find params[:movie_id]
+    @movie.favorites.build(user_id: current_user.id)
+
+    respond_to do |format|
+      if @movie.save
+        format.html { redirect_to @movie, notice: 'Movie was successfully added to your favorites.' }
+        format.json { render :show, status: :created, location: @movie }
+      else
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: @movie.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_movie

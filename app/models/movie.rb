@@ -6,6 +6,8 @@ class Movie < ApplicationRecord
   has_many :casts, dependent: :destroy
   has_many :actors, through: :casts
   has_many :reviews, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :users, through: :favorites
   has_attached_file :image, styles: { medium: '400x600>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
 
   # validations

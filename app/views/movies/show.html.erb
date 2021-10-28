@@ -15,13 +15,20 @@
 
       <h5>Movie Ratings: <span class="badge badge-warning"><%= @movie.reviews.any? ? @movie.reviews.average(:score) : "No reviews yet" %></span></h5>
 
+      <%= button_to movie_add_to_favorites_path(@movie), class: "btn btn-sm btn-success" do %>
+        <i class="fas fa-heart"></i> Add to favorites
+      <% end %>
+
       <% if current_user&.admin? %>
-        <%= link_to edit_movie_path(@movie), class: 'btn btn-warning btn-sm' do %>
-          <i class="far fa-edit"></i> Edit
-        <% end %>
-        <%= button_to @movie, { class: "btn btn-danger btn-sm", method: :delete } do %>
-          <i class="far fa-trash-alt"></i> Delete
-        <% end %>
+        <div class="row">
+          <%= link_to edit_movie_path(@movie), class: 'btn btn-warning btn-sm' do %>
+            <i class="far fa-edit"></i> Edit
+          <% end %>
+          <%= button_to @movie, { class: "btn btn-danger btn-sm", method: :delete } do %>
+            <i class="far fa-trash-alt"></i> Delete
+          <% end %>
+        </div>
+
       <% end %>
 
       <hr/>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :movies do
     resources :reviews
     post :create_cast
+    post :add_to_favorites
   end
 
   root 'movies#index', as: 'root'
