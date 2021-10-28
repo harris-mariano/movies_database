@@ -83,6 +83,15 @@
         <%= button_to movie_add_to_favorites_path(@movie), class: "btn btn-sm btn-success" do %>
           <i class="fas fa-heart"></i> Add to favorites
         <% end %>
+
+        <div class="row col-md-12">
+          <%= link_to edit_movie_path(@movie), class: 'btn btn-warning btn-sm' do %>
+                      <i class="far fa-edit"></i> Edit
+          <% end %>
+          <%= button_to @movie, { class: "btn btn-danger btn-sm pull-right", method: :delete } do %>
+                      <i class="far fa-trash-alt"></i> Delete
+          <% end %>
+        </div>
       </div>
     </div>
 
