@@ -13,5 +13,5 @@ Rails.application.routes.draw do
     post :add_to_favorites
   end
 
-  root 'movies#index', as: 'root'
+  root 'home#index', as: 'root'
 end

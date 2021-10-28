@@ -15,8 +15,7 @@
   <%= render 'layouts/navbar' %>
 
   <!-- Content -->
-  <main class="container-fluid">
-    <h3 class="border-bottom pb-2 mt-3"><%= yield(:title) %></h3>
+  <main role="main">
     <% if notice %>
       <%= render 'layouts/message' %>
     <% end %>
