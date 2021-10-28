@@ -17,7 +17,7 @@
           <div class="card mb-4 box-shadow">
             <%= link_to (image_tag movie.image.url(:medium), class: "card-img-top", width: "100", height: "250"), movie %>
             <div class="card-body">
-              <h5><%= movie.title %></h5>
+              <h5><%= movie.title %> <small>- <%= movie.release_year %></small></h5>
               <p class="card-text"><%= movie.summary %></p>
               <small class="card-text"><%= movie.genre %></small>
 
@@ -28,7 +28,7 @@
 
                 <small class="text-muted">
                   Directed by: <%= movie.director %>
-                  <% movie.reviews.any? ? " | Rate: #{movie.reviews.average(:score)}" : "" %>
+                  <%= movie.reviews.any? ? " | Rate: #{movie.reviews.average(:score)}" : "" %>
                 </small>
               </div>
             </div>

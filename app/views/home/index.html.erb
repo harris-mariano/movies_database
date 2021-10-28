@@ -19,7 +19,7 @@
           <div class="card mb-4 box-shadow">
             <%= link_to (image_tag movie.image.url(:medium), class: "card-img-top", width: "150", height: "250"), movie %>
             <div class="card-body">
-              <h5><%= movie.title %></h5>
+              <h5><%= movie.title %> <small>- <%= movie.release_year %></small></h5>
               <p class="card-text"><%= movie.summary %></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">

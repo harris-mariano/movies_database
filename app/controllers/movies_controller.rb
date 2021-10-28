@@ -3,7 +3,7 @@
 # controller for movies
 class MoviesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :ensure_can_perform_action, except: %i[index show]
+  before_action :ensure_can_perform_action, except: %i[index show add_to_favorites]
   before_action :set_movie, only: %i[show edit update destroy]
 
   def index
@@ -91,9 +91,5 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :release_year, :genre, :director, :summary, :image)
-  end
-
-  def ensure_can_perform_action
-    redirect_back fallback_location: movies_url, notice: 'Unathorized to perform action' unless current_user&.admin?
   end
 end

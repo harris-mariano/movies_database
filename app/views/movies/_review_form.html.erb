@@ -1,12 +1,17 @@
-<% if current_user&.admin? %>
-  <div class="card mt-4">
-    <h5 class="card-header">Leave a comment</h5>
-    <div class="card-body">
-      <%= form_with url: movie_reviews_path(@movie), model: Review.new do |f| %>
+<div class="card mt-4">
+  <h5 class="card-header">Leave a comment</h5>
+  <div class="card-body">
+    <%= form_with url: movie_reviews_path(@movie), model: Review.new do |f| %>
+      <div class="form-group">
+        <%= f.label :score %>
         <%= f.select :score, (1..10).map { |i| [i, i] }, { include_blank: true }, class: "form-control mb-2", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :comment %>
         <%= f.text_area :comment, class: "form-control", required: true %>
-        <%= f.submit "Submit", class: "btn btn-dark mt-2 float-right" %>
-      <% end %>
-    </div>
+      </div>
+
+      <%= f.submit "Submit", class: "btn btn-dark btn-sm mt-2 float-right" %>
+    <% end %>
   </div>
-<% end %>
+</div>
