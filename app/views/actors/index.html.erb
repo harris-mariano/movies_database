@@ -1,34 +1,36 @@
-<% content_for :title, "Actors List" %>
+<div class="album py-5">
+  <div class="container">
 
-<% if current_user&.admin? %>
-  <%= link_to new_actor_path, class: "btn btn-info btn-sm" do %>
-    <i class="fas fa-user-plus"></i> Add New Actor
-  <% end %>
-<% end %>
+    <h3 class="mb-4">
+      All Actors
 
-<div class="row mt-4">
-  <div class="col-12 col-sm-8">
+      <% if current_user&.admin? %>
+        <%= link_to new_actor_path, class: "btn btn-primary btn-sm float-right" do %>
+          <i class="fas fa-video"></i> Add New Actor
+        <% end %>
+      <% end %>
+    </h3>
+
     <div class="row">
-      <!-- Content -->
       <% @actors.each do |actor| %>
-        <div class="col-6 col-sm-3 mb-2">
-          <div class="card">
-            <%= link_to (image_tag actor.image.url(:medium), class: "card-img-top"), actor %>
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <%= link_to (image_tag actor.image.url(:medium), class: "card-img-top", width: "100", height: "250"), actor %>
             <div class="card-body">
-              <h5 class="card-title"><%= link_to "#{actor.full_name}", actor %></h5>
-              <%= link_to actor, class: "btn btn-primary btn-sm mt-3" do %>
-                <i class="far fa-user"></i> View Actor
-              <% end %>
+              <h5><%= actor.full_name %></h5>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <%= link_to "View", actor, class: "btn btn-sm btn-outline-primary" %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       <% end %>
     </div>
 
-    <!-- Pagination -->
-    <%= paginate @actors, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
-  </div>
+    <%= paginate @actors, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm float-right" %>
 
-  <!-- Sidebar -->
-  <%= render 'layouts/sidebar' %>
+  </div>
 </div>

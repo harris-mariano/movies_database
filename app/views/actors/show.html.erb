@@ -1,53 +1,68 @@
-<% content_for :title, "#{@actor.full_name}" %>
+<%# content_for :title, "#{@actor.full_name}" %>
 
-<div class="row mt-4">
+<!--<div class="row mt-4">-->
   <!-- Content -->
-  <div class="col-12 col-sm-8">
-    <p><%= image_tag @actor.image.url(:medium), class: "img-fluid" %></p>
-    <div class="movie-content">
-      <h5>Full Name: <small><%= @actor.full_name %></small></h5>
+<!--  <div class="col-12 col-sm-8">-->
+<!--    <p><%#= image_tag @actor.image.url(:medium), class: "img-fluid" %></p>-->
+<!--    <div class="movie-content">-->
+<!--      <h5>Full Name: <small><%#= @actor.full_name %></small></h5>-->
 
-      <% if current_user&.admin? %>
-        <%= link_to edit_actor_path(@actor), class: 'btn btn-warning btn-sm' do %>
-          <i class="far fa-edit"></i> Edit
-        <% end %>
-        <%= button_to @actor, { class: "btn btn-danger btn-sm", method: :delete } do %>
-          <i class="far fa-trash-alt"></i> Delete
-        <% end %>
-      <% end %>
+      <%# if current_user&.admin? %>
+        <%#= link_to edit_actor_path(@actor), class: 'btn btn-warning btn-sm' do %>
+<!--          <i class="far fa-edit"></i> Edit-->
+        <%# end %>
+        <%#= button_to @actor, { class: "btn btn-danger btn-sm", method: :delete } do %>
+<!--          <i class="far fa-trash-alt"></i> Delete-->
+        <%# end %>
+      <%# end %>
 
-      <hr/>
-      <h5 class="mt-3">Movies</h5>
-      <table class="table table-bordered">
-        <% @actor.movies.each do |movie| %>
-          <tr>
-            <td><%= link_to (image_tag movie.image.url(:medium), width: '100'), movie %></td>
-            <td><%= link_to "#{movie.title}", movie %></td>
-            <td><%= movie.release_year %></td>
-            <td><%= movie.genre %></td>
-          </tr>
-        <% end %>
-      </table>
+<!--      <hr/>-->
+<!--      <h5 class="mt-3">Movies</h5>-->
+<!--      <table class="table table-bordered">-->
+        <%# @actor.movies.each do |movie| %>
+<!--          <tr>-->
+<!--            <td><%#= link_to (image_tag movie.image.url(:medium), width: '100'), movie %></td>-->
+<!--            <td><%#= link_to "#{movie.title}", movie %></td>-->
+<!--            <td><%#= movie.release_year %></td>-->
+<!--            <td><%#= movie.genre %></td>-->
+<!--          </tr>-->
+        <%# end %>
+<!--      </table>-->
 
       <!-- Add movie -->
-      <% if current_user&.admin? %>
-        <div class="card mt-4">
-          <h5 class="card-header">Add cast to movie</h5>
-          <div class="card-body">
-            <%= form_with url: actor_create_cast_path(@actor.id), method: :post do |f| %>
-              <div class="form-group">
-                <%= f.select :movie_id, Movie.all.map { |t| [t.title, t.id] },
-                             { include_blank: true },
-                             class: "form-control" %>
-              </div>
-              <%= f.submit "Add movie", class: "btn btn-sm btn-primary float-right" %>
-            <% end %>
-          </div>
+
+<!--    </div>-->
+<!--  </div>-->
+
+  <!-- Sidebar -->
+  <%#= render 'layouts/sidebar' %>
+<!--</div>-->
+
+
+<div class="container actor-details mt-5 mb-4">
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading"><%= @actor.full_name %></h2>
+
+      <div class="mt-3">
+        <div class="row col-md-12">
+          <%= link_to edit_actor_path(@actor), class: 'btn btn-warning btn-sm' do %>
+            <i class="far fa-edit"></i> Edit
+          <% end %>
+          <%= button_to @actor, { class: "btn btn-danger btn-sm pull-right", method: :delete } do %>
+            <i class="far fa-trash-alt"></i> Delete
+          <% end %>
         </div>
-      <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-5 order-md-1">
+      <%= image_tag @actor.image.url(:medium), class: "featurette-image img-fluid mx-auto", width: "500", height: "500" %>
     </div>
   </div>
 
-  <!-- Sidebar -->
-  <%= render 'layouts/sidebar' %>
+  <hr class="featurette-divider">
+
+  <%= render 'actors/actor_movies' %>
+  <%= render 'actors/actor_movies_form' %>
 </div>

@@ -1,0 +1,13 @@
+<% if current_user&.admin? %>
+  <div class="card mt-4">
+    <h5 class="card-header">Add cast to movie</h5>
+    <div class="card-body">
+      <%= form_with url: actor_create_cast_path(@actor.id), method: :post do |f| %>
+        <div class="form-group">
+          <%= f.select :movie_id, Movie.all.map { |t| [t.title, t.id] }, { include_blank: true }, class: "form-control" %>
+        </div>
+        <%= f.submit "Add movie", class: "btn btn-sm btn-primary float-right" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
