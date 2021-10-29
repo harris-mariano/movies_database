@@ -84,14 +84,16 @@
           <i class="fas fa-heart"></i> Add to favorites
         <% end %>
 
-        <div class="row col-md-12">
-          <%= link_to edit_movie_path(@movie), class: 'btn btn-warning btn-sm' do %>
-                      <i class="far fa-edit"></i> Edit
-          <% end %>
-          <%= button_to @movie, { class: "btn btn-danger btn-sm pull-right", method: :delete } do %>
-                      <i class="far fa-trash-alt"></i> Delete
-          <% end %>
-        </div>
+        <% if current_user.admin? %>
+          <div class="row col-md-12">
+            <%= link_to edit_movie_path(@movie), class: 'btn btn-warning btn-sm' do %>
+              <i class="far fa-edit"></i> Edit
+            <% end %>
+            <%= button_to @movie, { class: "btn btn-danger btn-sm pull-right", method: :delete } do %>
+              <i class="far fa-trash-alt"></i> Delete
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -108,5 +110,6 @@
   <hr class="featurette-divider">
 
   <%= render 'movies/reviews' %>
-  <%= render 'movies/review_form' %>
+  <%= link_to "Add review to this movie", new_movie_review_path(@movie) %>
+  <%#= render 'movies/review_form' %>
 </div>

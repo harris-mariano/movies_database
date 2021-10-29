@@ -17,12 +17,13 @@ class ReviewsController < ApplicationController
   def edit; end
 
   def create
-    @movie = Movie.find(params[:movie_id]).reviews.new(review_params)
-    @movie.user_id = current_user.id
+    @movie = Movie.find(params[:movie_id])
+    @review = @movie.reviews.new(review_params)
+    @review.user_id = current_user.id
 
     respond_to do |format|
-      if @movie.save
-        format.html { redirect_to movie_path(params[:movie_id]), notice: 'Review was successfully created.' }
+      if @review.save
+        format.html { redirect_to movie_path(@movie), notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render movie_path(params[:movie_id]), status: :unprocessable_entity }
@@ -32,9 +33,11 @@ class ReviewsController < ApplicationController
   end
 
   def update
+    @movie = Movie.find(params[:movie_id])
+
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+        format.html { redirect_to movie_path(@movie), notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -45,8 +48,10 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
+    @movie = Movie.find(params[:movie_id])
+
     respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to movie_path(@movie), notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,37 @@
-<%= form_with(model: review, local: true) do |form| %>
+<%#= form_with(url: movie_reviews_path(params[:movie_id]), model: review, local: true) do |form| %>
+  <%# if review.errors.any? %>
+<!--    <div id="error_explanation">-->
+<!--      <h2><%#= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>-->
+
+<!--      <ul>-->
+        <%# review.errors.full_messages.each do |message| %>
+<!--          <li><%#= message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+
+<!--  <div class="field">-->
+    <%#= form.label :movie_id %>
+    <%#= form.text_field :movie_id %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= form.label :comment %>
+    <%#= form.text_area :comment %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= form.label :score %>
+    <%#= form.number_field :score %>
+<!--  </div>-->
+
+<!--  <div class="actions">-->
+    <%#= form.submit %>
+<!--  </div>-->
+<%# end %>
+
+<div class="container mb-4">
   <% if review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -11,22 +44,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :movie_id %>
-    <%= form.text_field :movie_id %>
+  <div class="card mt-4">
+    <h5 class="card-header">Make a review</h5>
+    <div class="card-body">
+      <%= form_with(url: movie_review_path(params[:movie_id]), model: review) do |f| %>
+        <div class="form-group">
+          <%= f.label :score, "Stars"%>
+          <%= f.select :score, (1..10).map { |i| [i, i] }, { include_blank: true }, class: "form-control form-control-sm mb-2", required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :comment %>
+          <%= f.text_area :comment, class: "form-control form-control-sm", required: true %>
+        </div>
+
+        <%= f.submit "Submit", class: "btn btn-primary btn-sm mt-2 float-right" %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_area :comment %>
-  </div>
-
-  <div class="field">
-    <%= form.label :score %>
-    <%= form.number_field :score %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

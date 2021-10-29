@@ -29,8 +29,13 @@
       <% else %>
         <% @movie.reviews.order(created_at: :desc).each do |review| %>
           <li class="list-group-item">
-            <p><%= review.comment %></p>
-            <small><%= review.user.first_name %> - <%= time_ago_in_words(review.created_at) %></small>
+            <p><%= review.comment %><strong class="float-right"><i class="fas fa-star"></i> <%= review.score %></strong></p>
+            <p>
+              <small><%= review.user.first_name %> - <%= time_ago_in_words(review.created_at) %></small>
+              <%= link_to "Edit", edit_movie_review_path(@movie, review), class: "btn btn-sm btn-warning float-right" %>
+              <%= button_to "Detele", movie_review_path(@movie, review), method: :delete, class: "btn btn-sm btn-danger float-right" %>
+            </p>
+
           </li>
         <% end %>
       <% end %>
