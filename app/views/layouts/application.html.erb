@@ -11,25 +11,22 @@
     <%= stylesheet_pack_tag 'application' %>
   </head>
   <body id=<%= controller.controller_name %>>
-  <!-- Navbar -->
-  <%= render 'layouts/navbar' %>
+    <%= render 'layouts/navbar' %>
 
-  <!-- Content -->
-  <main role="main">
-    <div class="container">
-      <% if notice %>
-        <%= render 'layouts/notice' %>
-      <% end %>
+    <main role="main">
+      <div class="container">
+        <% if notice %>
+          <%= render 'layouts/notice' %>
+        <% end %>
 
-      <% if alert %>
-        <%= render 'layouts/alert' %>
-      <% end %>
-    </div>
+        <% if alert %>
+          <%= render 'layouts/alert' %>
+        <% end %>
+      </div>
 
-    <%= yield %>
-  </main>
+      <%= yield %>
+    </main>
 
-  <!-- Footer -->
-  <%= render 'layouts/footer' %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

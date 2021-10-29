@@ -2,7 +2,6 @@
 
 # controller for user profiles
 class ProfilesController < ApplicationController
-  # before_action :ensure_can_perform_action, except: %i[index show]
   before_action :set_profile, only: %i[show edit update destroy]
 
   def index

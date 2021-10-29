@@ -7,4 +7,8 @@ class Review < ApplicationRecord
 
   # validations
   validates :movie_id, :user_id, :comment, :score, presence: true
+
+  def belongs_to_current_user?(current_user)
+    user == current_user
+  end
 end

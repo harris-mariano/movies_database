@@ -3,7 +3,6 @@
 # controller for movies
 class MoviesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  # before_action :ensure_can_perform_action, except: %i[index show add_to_favorites]
   before_action :set_movie, only: %i[show edit update destroy]
 
   def index

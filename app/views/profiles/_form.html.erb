@@ -1,15 +1,3 @@
-<%# if user.errors.any? %>
-<!--  <div id="error_explanation" class="text-danger">-->
-<!--    <h2><%#= pluralize(user.errors.count, "error") %> prohibited this profile from being saved:</h2>-->
-
-<!--    <ul>-->
-      <%# user.errors.full_messages.each do |message| %>
-<!--        <li><%#= message %></li>-->
-      <%# end %>
-<!--    </ul>-->
-<!--  </div>-->
-<%# end %>
-
 <div class="container">
   <h4 class="mb-3">Edit Profile</h4>
   <%= form_with url: profile_path, model: user, method: :patch, class: "needs-validation" do |f| %>

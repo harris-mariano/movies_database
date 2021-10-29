@@ -2,8 +2,7 @@
 
 # controller for actors
 class ActorsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
-  # before_action :ensure_can_perform_action, except: %i[index show add_to_favorites]
+  skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_actor, only: %i[show edit update destroy]
 
   def index

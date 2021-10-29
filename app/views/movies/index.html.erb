@@ -28,7 +28,7 @@
 
                 <small class="text-muted">
                   Directed by: <%= movie.director %>
-                  <%= movie.reviews.any? ? " | Rate: #{movie.reviews.average(:score)}" : "" %>
+                  <%= movie.reviews.any? ? " | Rate: #{movie.average_rating}" : "" %>
                 </small>
               </div>
             </div>

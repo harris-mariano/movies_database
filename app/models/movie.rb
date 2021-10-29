@@ -13,4 +13,8 @@ class Movie < ApplicationRecord
   # validations
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
   validates :title, :release_year, :genre, :director, :summary, :image, presence: true
+
+  def average_rating
+    reviews.average(:score)
+  end
 end
