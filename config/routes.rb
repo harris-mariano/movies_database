@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :profiles
+  resources :profiles do
+    delete :remove_from_favorites, param: :movie_id
+  end
+
   resources :actors do
     post :create_cast
   end
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
     resources :reviews
     post :create_cast
     post :add_to_favorites
+    delete :remove_from_favorites
   end
 
   root 'home#index', as: 'root'

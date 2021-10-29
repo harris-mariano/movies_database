@@ -17,4 +17,8 @@ class Movie < ApplicationRecord
   def average_rating
     reviews.average(:score)
   end
+
+  def user_favorite?(current_user)
+    favorites.where(user_id: current_user.id).any?
+  end
 end

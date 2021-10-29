@@ -9,9 +9,16 @@
       <p class="lead"><strong>Story Plot: </strong><%= @movie.summary %></p>
 
       <div class="mt-3">
-        <%= button_to movie_add_to_favorites_path(@movie), class: "btn btn-sm btn-success mb-4" do %>
-          <i class="fas fa-heart"></i> Add to favorites
+        <% unless @movie.user_favorite?(current_user) %>
+          <%= button_to movie_add_to_favorites_path(@movie), class: "btn btn-sm btn-success mb-4" do %>
+            <i class="fas fa-heart"></i> Add to favorites
+          <% end %>
+        <% else %>
+          <%= button_to movie_remove_from_favorites_path(@movie), class: "btn btn-sm btn-danger mb-4", method: :delete do %>
+            <i class="fas fa-times"></i> Remove from favorites
+          <% end %>
         <% end %>
+
 
         <% if current_user.admin? %>
           <div class="row col-md-12">

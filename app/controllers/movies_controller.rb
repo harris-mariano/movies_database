@@ -82,6 +82,17 @@ class MoviesController < ApplicationController
     end
   end
 
+  def remove_from_favorites
+    @movie = Movie.find(params[:movie_id])
+    favorite_item = @movie.favorites.where(user_id: current_user.id).first
+    @movie.favorites.delete(favorite_item.id)
+
+    respond_to do |format|
+      format.html { redirect_to @movie, notice: 'Movie was successfully removed from your favorites.' }
+      format.json { render :show, status: :created, location: @movie }
+    end
+  end
+
   private
 
   def set_movie
