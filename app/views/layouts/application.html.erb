@@ -16,9 +16,15 @@
 
   <!-- Content -->
   <main role="main">
-    <% if notice %>
-      <%= render 'layouts/message' %>
-    <% end %>
+    <div class="container">
+      <% if notice %>
+        <%= render 'layouts/notice' %>
+      <% end %>
+
+      <% if alert %>
+        <%= render 'layouts/alert' %>
+      <% end %>
+    </div>
 
     <%= yield %>
   </main>
