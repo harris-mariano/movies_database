@@ -3,6 +3,7 @@
 # controller for actors
 class ActorsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
+  before_action :ensure_user_is_admin, except: %i[index show]
   before_action :set_actor, only: %i[show edit update destroy]
 
   def index

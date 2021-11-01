@@ -3,6 +3,7 @@
 # controller for movies
 class MoviesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
+  before_action :ensure_user_is_admin, except: %i[index show add_to_favorites remove_from_favorites]
   before_action :set_movie, only: %i[show edit update destroy]
 
   def index
@@ -68,27 +69,19 @@ class MoviesController < ApplicationController
   end
 
   def add_to_favorites
-    @movie = Movie.find params[:movie_id]
-    @movie.favorites.build(user_id: current_user.id)
+    current_user.favorites.build(movie_id: params[:movie_id]).save
 
     respond_to do |format|
-      if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully added to your favorites.' }
-        format.json { render :show, status: :created, location: @movie }
-      else
-        format.html { render :show, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_back fallback_location: root_url, notice: 'Movie was successfully added to your favorites.' }
+      format.json { render :show, status: :created, location: @movie }
     end
   end
 
   def remove_from_favorites
-    @movie = Movie.find(params[:movie_id])
-    favorite_item = @movie.favorites.where(user_id: current_user.id).first
-    @movie.favorites.delete(favorite_item.id)
+    current_user.favorites.find_by(movie_id: params[:movie_id]).destroy
 
     respond_to do |format|
-      format.html { redirect_to @movie, notice: 'Movie was successfully removed from your favorites.' }
+      format.html { redirect_back fallback_location: root_url, notice: 'Movie was successfully removed from your favorites.' }
       format.json { render :show, status: :created, location: @movie }
     end
   end

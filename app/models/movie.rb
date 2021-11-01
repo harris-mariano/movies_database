@@ -19,6 +19,6 @@ class Movie < ApplicationRecord
   end
 
   def user_favorite?(current_user)
-    favorites.where(user_id: current_user.id).any?
+    current_user.movies.where(id: id).any?
   end
 end
