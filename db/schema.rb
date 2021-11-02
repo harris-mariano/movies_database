@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_030914) do
+ActiveRecord::Schema.define(version: 2021_11_02_125654) do
 
   create_table "actors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "full_name"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_030914) do
     t.string "release_year"
     t.string "genre"
     t.string "director"
-    t.text "summary"
+    t.text "story"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image_file_name"

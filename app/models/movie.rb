@@ -8,11 +8,11 @@ class Movie < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :users, through: :favorites
-  has_attached_file :image, styles: { medium: '400x600>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
+  has_attached_file :image, styles: { home: '1280x850', medium: '640x425', thumb: '100x100' }, default_url: '/images/:style/missing.png'
 
   # validations
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
-  validates :title, :release_year, :genre, :director, :summary, :image, presence: true
+  validates :title, :release_year, :genre, :director, :story, :image, presence: true
 
   def average_rating
     reviews.average(:score)

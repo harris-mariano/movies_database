@@ -1,44 +1,37 @@
-<div class="container marketing mt-5 mb-5">
-  <div class="row">
-    <div class="col-lg-4">
-      <%= image_tag @user.image.blank? ? "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" : @user.image.url(:medium), class: "rounded-circle", width: "140", height: "140" %>
-      <h2 class="mt-3"><%= @user.first_name %></h2>
-      <p>Bio section</p>
-    </div>
+<section class="featured-posts no-padding-top no-padding-bottom">
+  <div class="container">
+    <header>
+      <h2>My Profile</h2>
+    </header>
 
-    <div class="col-lg-8">
-      <h3>User Details</h3>
-      <p><strong>Full Name:</strong> <%= @user.first_name + " " + @user.last_name %></p>
-      <p><strong>Email:</strong> <%= @user.email %></p>
-      <% if current_user == @user %>
-        <p>
-          <%= link_to "Edit profile", edit_user_registration_path, class: "btn btn-primary", role: "button" %>
-        </p>
-      <% end %>
-    </div>
-  </div>
+    <div class="row d-flex align-items-stretch">
+      <div class="image col-md-4" style="max-height: 344px; max-width: 344px;"><%= image_tag @user.image.blank? ? "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" : @user.image.url(:medium) %></div>
 
-  <div class="row">
-    <div class="col-lg-6 offset-lg-4">
-      <h3>User Favorites</h3>
+      <div class="text col-md-8">
+        <div class="text-inner align-items-center">
+          <div class="content">
+            <header>
+              <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
+            </header>
 
-      <ul class="list-group">
-        <% if @user.movies.blank? %>
-          No favorites found!
-        <% else %>
-          <% @user.movies.each do |movie| %>
-            <li class="list-group-item">
-              <%= link_to movie.title, movie %>
+            <p>Email address: <%= current_user.email %></p>
+            <%= link_to "Edit profile", edit_user_registration_path, class: "btn btn-sm btn-warning" %>
 
-              <%= button_to movie_remove_from_favorites_path(movie), method: :delete, class: "btn btn-danger btn-sm float-right" do %>
-                <i class="fas fa-times"></i>
-              <% end %>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
+            <header class="mt-5">
+              <h2>Favorites</h2>
+            </header>
+
+            <% current_user.movies.each do |movie| %>
+              <div class="item d-flex justify-content-between">
+                <a href="#"><%= movie.title %></a>
+                <span><%= button_to movie_remove_from_favorites_path(movie), method: :delete, class: "btn btn-danger btn-sm" do %><i class="fas fa-times"></i><% end %></span>
+              </div>
+            <% end %>
+
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-</div>
-
+</section>

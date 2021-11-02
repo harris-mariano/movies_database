@@ -17,4 +17,9 @@
 
 require('bootstrap')
 import 'bootstrap/dist/css/bootstrap'
+import 'jquery/dist/jquery'
+import 'bootstrap/dist/js/bootstrap'
 import "@fortawesome/fontawesome-free/css/all"
+import 'popper.js'
+import 'fancybox/dist/css/jquery.fancybox.css'
+// import 'fancybox/dist/js/jquery.fancybox'

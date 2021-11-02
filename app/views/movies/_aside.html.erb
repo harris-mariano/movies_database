@@ -1,0 +1,44 @@
+<aside class="col-lg-4">
+  <div class="widget search">
+    <header>
+      <h3 class="h6">Search movies</h3>
+    </header>
+    <%= search_form_for @q, class: "search-form" do |f| %>
+      <div class="form-group">
+        <%= f.search_field :title_or_genre_cont, placeholder: "What are you looking for?" %>
+        <%= f.button class: "submit", type: "submit" do %>
+          <i class="icon-search"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="widget latest-posts">
+    <header>
+      <h3 class="h6">Latest Movies</h3>
+    </header>
+    <div class="blog-posts">
+      <% @movies.first(5).each do |movie| %>
+        <%= link_to movie do %>
+          <div class="item d-flex align-items-center">
+            <div class="image"><%= image_tag movie.image.url(:thumb), class: "img-fluid" %></div>
+            <div class="title">
+              <strong><%= movie.title %></strong>
+              <div class="d-flex align-items-center">
+                <div class="views"><%= movie.release_year %></div>
+                <div class="comments"><i class="icon-comment"></i><%= movie.reviews.count %></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+<!--  <div class="widget categories">-->
+<!--    <header>-->
+<!--      <h3 class="h6">Genre</h3>-->
+<!--    </header>-->
+<!--    <div class="item d-flex justify-content-between"><a href="#">Growth</a><span>12</span></div>-->
+<!--  </div>-->
+</aside>

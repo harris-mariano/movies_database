@@ -11,7 +11,9 @@ class MoviesController < ApplicationController
     @movies = @q.result.page params[:page]
   end
 
-  def show; end
+  def show
+    @review = current_user&.reviews&.new
+  end
 
   def new
     @movie = Movie.new
@@ -93,6 +95,6 @@ class MoviesController < ApplicationController
   end
 
   def movie_params
-    params.require(:movie).permit(:title, :release_year, :genre, :director, :summary, :image)
+    params.require(:movie).permit(:title, :release_year, :genre, :director, :story, :image)
   end
 end

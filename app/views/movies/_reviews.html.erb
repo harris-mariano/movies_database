@@ -1,24 +1,30 @@
-<div class="row">
-  <div class="col-lg-12">
-    <h3>Reviews</h3>
+<div class="post-comments">
+  <header>
+    <h3 class="h6">Reviews<span class="no-of-comments">(<%=@movie.reviews.count %>)</span></h3>
+  </header>
 
-    <ul class="list-group">
-      <% if @movie.reviews.blank? %>
-        No reviews found!
-      <% else %>
-        <% @movie.reviews.order(created_at: :desc).each do |review| %>
-          <li class="list-group-item">
-            <p><%= review.comment %><strong class="float-right"><i class="fas fa-star"></i> <%= review.score %></strong></p>
-            <p>
-              <small><%= review.user.first_name %> - <%= time_ago_in_words(review.created_at) %></small>
-              <% if current_user.admin? || review.belongs_to_current_user?(current_user) %>
-                <%= link_to "Edit", edit_movie_review_path(@movie, review), class: "btn btn-sm btn-warning float-right" %>
-                <%= button_to "Detele", movie_review_path(@movie, review), method: :delete, class: "btn btn-sm btn-danger float-right" %>
-              <% end %>
-            </p>
-          </li>
-        <% end %>
-      <% end %>
-    </ul>
-  </div>
+  <% if @movie.reviews.any? %>
+    <% @movie.reviews.order(created_at: :desc).each do |review| %>
+      <div class="comment">
+        <div class="comment-header d-flex justify-content-between">
+          <div class="user d-flex align-items-center">
+            <div class="image"><%= image_tag review.user.image.url(:medium), class: "img-fluid rounded-circle" %></div>
+            <div class="title"><strong><%= review.user.first_name %> <%= review.user.last_name %></strong><span class="date"><%= review.created_at.strftime('%B %Y') %></span></div>
+          </div>
+
+
+        </div>
+        <div class="comment-body">
+          <p><%= review.comment %></p>
+          <p><i class="fas fa-star" style="color: green"></i> <%= review.score %></p>
+          <div class="row">
+            <%=link_to "Edit", edit_movie_review_path(@movie, review), class: "btn btn-sm btn-warning" %> |
+            <%= button_to "Delete", movie_review_path(@movie, review), method: :delete, class: "btn btn-sm btn-danger float-right" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No reviews yet!</p>
+  <% end %>
 </div>

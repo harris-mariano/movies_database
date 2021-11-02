@@ -1,43 +1,38 @@
-<div class="album py-5">
-  <div class="container">
+<div class="container">
+  <div class="row">
 
-    <h3 class="mb-4">
-      All Movies
+    <main class="posts-listing col-lg-8">
+      <div class="container">
+        <div class="row">
 
-      <% if current_user&.admin? %>
-        <%= link_to new_movie_path, class: "btn btn-primary btn-sm float-right" do %>
-          <i class="fas fa-video"></i> Add New Movie
-        <% end %>
-      <% end %>
-    </h3>
+          <% @movies.each do |movie| %>
+            <div class="post col-xl-6">
+              <div class="post-thumbnail">
+                <%= link_to (image_tag movie.image.url(:medium), class: "img-fluid"), movie %>
+              </div>
 
-    <div class="row">
-      <% @movies.each do |movie| %>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <%= link_to (image_tag movie.image.url(:medium), class: "card-img-top", width: "100", height: "250"), movie %>
-            <div class="card-body">
-              <h5><%= movie.title %> <small>- <%= movie.release_year %></small></h5>
-              <p class="card-text"><%= movie.summary %></p>
-              <small class="card-text"><%= movie.genre %></small>
+              <div class="post-details">
+                <%= link_to movie do %>
+                  <h3 class="h4"><%= movie.title %></h3>
+                <% end %>
 
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <%= link_to "View", movie, class: "btn btn-sm btn-outline-primary" %>
-                </div>
+                <p class="text-muted"><%= movie.story.truncate(445, separator: ' ') %></p>
 
-                <small class="text-muted">
-                  Directed by: <%= movie.director %>
-                  <%= movie.reviews.any? ? " | Rate: #{movie.average_rating}" : "" %>
-                </small>
+                <footer class="d-flex align-items-center">
+                  <div class="title"><%= movie.director %></div>
+                  <div class="date"><%= movie.genre %></div>
+                  <div class="date"><%= movie.release_year %></div>
+                  <div class="comments meta-last"><i class="icon-comment"></i><%= movie.reviews.count %></div>
+                </footer>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
-      <% end %>
-    </div>
 
-    <%= paginate @movies, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm float-right" %>
+        <%= paginate @movies, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm float-right" %>
+      </div>
+    </main>
 
+    <%= render 'movies/aside' %>
   </div>
 </div>

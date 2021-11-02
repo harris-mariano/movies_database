@@ -1,0 +1,24 @@
+<div class="row d-flex align-items-stretch">
+  <div class="image col-lg-5" style="min-height: 344px;"><%= image_tag movie.image.url(:home) %></div>
+
+  <div class="text col-lg-7">
+    <div class="text-inner d-flex align-items-center">
+      <div class="content">
+        <header class="post-header">
+          <%= link_to movie do %>
+            <h2 class="h4"><%= movie.title %></h2>
+          <% end %>
+        </header>
+
+        <p><%= movie.story.truncate(373, separator: ' ') %></p>
+
+        <footer class="d-flex align-items-center">
+          <div class="title"><span><%= movie.director %></span></div>
+          <div class="date"><%= movie.genre %></div>
+          <div class="date"><i class="icon-clock"></i> <%= movie.release_year %></div>
+          <div class="comments"><i class="icon-comment"></i><%= movie.reviews.count %></div>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

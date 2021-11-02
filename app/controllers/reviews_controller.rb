@@ -10,8 +10,6 @@ class ReviewsController < ApplicationController
     @review = current_user.reviews.new
   end
 
-  def edit; end
-
   def create
     @review = current_user.reviews.new(review_params)
 
@@ -23,6 +21,13 @@ class ReviewsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def edit
+    respond_to do |format|
+      format.html { render 'movies/show' }
+      format.json { render :show, status: :ok, location: @review }
     end
   end
 

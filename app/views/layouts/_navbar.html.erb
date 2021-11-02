@@ -1,46 +1,32 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container justify-content-between">
-      <%= link_to "Movie Database", root_path, class: "navbar-brand" %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<header class="header">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <div class="navbar-header d-flex align-items-center justify-content-between">
+        <%= link_to "Movie Database", root_path, class: "navbar-brand" %>
 
-      <div class="collapse navbar-collapse" id="navbar_content">
-        <ul class="navbar-nav">
-          <%= link_to "Movies", movies_path, class: "nav-item nav-link #{controller.controller_name == 'movies' ? 'active' : ''}" %>
-          <%= link_to "Actors", actors_path, class: "nav-item nav-link #{controller.controller_name == 'actors' ? 'active' : ''}" %>
-        </ul>
+        <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
+      </div>
 
-        <form class="form-inline my-2 my-lg-0 ml-3 mr-auto">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search a movie.." aria-label="Search">
-          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
-
-        <ul class="navbar-nav">
+      <div id="navbarcollapse" class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <%= link_to "Movies", movies_path, class: "nav-link #{controller.controller_name == 'movies' ? 'active' : ''}" %>
+          </li>
           <% if user_signed_in? %>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Welcome back, <%= current_user.first_name %>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%= link_to "Profile", user_path(current_user), class: "dropdown-item #{controller.controller_name == 'profiles' ? 'active' : ''}" %>
-                <% if current_user.admin? %>
-                  <%= link_to "User list", users_path, class: "dropdown-item" %>
-                <% end %>
-
-                <div class="dropdown-divider"></div>
-                <%= button_to "Logout", destroy_user_session_path, class: "dropdown-item", method: :delete %>
-              </div>
+            <li class="nav-item">
+              <%= link_to "My profile", user_path(current_user), class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link btn" %>
             </li>
           <% else %>
-            <%= link_to "Login", new_user_session_path, class: "nav-item nav-link #{controller.controller_name == 'sessions' ? 'active' : ''}" %>
-            <%= link_to "Register", new_user_registration_path, class: "nav-item nav-link #{controller.controller_name == 'registrations' ? 'active' : ''}" %>
+            <li class="nav-item">
+              <%= link_to "Login here", new_user_session_path, class: "nav-link #{controller.controller_name == 'sessions' ? 'active' : ''}" %>
+            </li>
           <% end %>
         </ul>
+
       </div>
     </div>
-
   </nav>
 </header>
