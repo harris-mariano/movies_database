@@ -2,7 +2,7 @@
 
 # controller for movies
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  skip_before_action :authenticate_user!, only: %i[index show]
   before_action :ensure_user_is_admin, except: %i[index show add_to_favorites remove_from_favorites]
   before_action :set_movie, only: %i[show edit update destroy]
 

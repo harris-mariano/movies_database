@@ -14,5 +14,6 @@ class User < ApplicationRecord
 
   # validations
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :email, :password, presence: true
+  validates :password, confirmation: true
 end

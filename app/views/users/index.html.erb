@@ -10,11 +10,13 @@
   </thead>
 
   <tbody>
-    <% @profiles.each do |profile| %>
+    <% @users.each do |user| %>
       <tr>
-        <td><%= link_to 'Show', profile %></td>
-        <td><%= link_to 'Edit', edit_user_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= user.first_name %> <%= user.last_name %></td>
+        <td><%= user.admin %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= button_to "Destroy", user, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>

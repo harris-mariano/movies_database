@@ -26,7 +26,10 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <%= link_to "Profile", user_path(current_user), class: "dropdown-item #{controller.controller_name == 'profiles' ? 'active' : ''}" %>
-                <a class="dropdown-item" href="#">Users</a>
+                <% if current_user.admin? %>
+                  <%= link_to "User list", users_path, class: "dropdown-item" %>
+                <% end %>
+
                 <div class="dropdown-divider"></div>
                 <%= button_to "Logout", destroy_user_session_path, class: "dropdown-item", method: :delete %>
               </div>

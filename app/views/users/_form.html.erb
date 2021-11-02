@@ -1,6 +1,19 @@
 <div class="container">
-  <h4 class="mb-3">Edit Profile</h4>
-  <%= form_with url: user_path, model: user, method: :patch, class: "needs-validation" do |f| %>
+  <h4 class="mb-3"><%= user.first_name %> <%= user.last_name %></h4>
+
+  <%= form_with url: action, model: user, class: "needs-validation" do |f| %>
+    <% if user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+          <% user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div class="row">
       <div class="col-md-6 mb-3">
         <%= f.label :first_name %>
@@ -24,11 +37,35 @@
 
       <div class="col-md-6 mb-3">
         <%= f.label :email %>
-        <%= f.text_field :email, class: "form-control form-control-sm", disabled: true, placeholder: "address@domain.com" %>
-        <div class="invalid-feedback">
-          Please enter a valid email address for shipping updates.
-        </div>
+        <%= f.text_field :email, class: "form-control form-control-sm", placeholder: "address@domain.com" %>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control form-control-sm" %>
+        <% if user.errors[:password].present? %>
+          <div class="text-danger">
+            Password is required.
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: "form-control form-control-sm" %>
+        <% if user.errors[:password_confirmation].present? %>
+          <div class="text-danger">
+            Password confirmation doesn't match Password.
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <%= f.check_box :admin, class: "form-check form-check-sm" %>
+      <%= f.label :admin, class: "form-check-label" %>
     </div>
 
     <div class="row">

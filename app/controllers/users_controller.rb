@@ -3,6 +3,7 @@
 # controller for user profiles
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :ensure_user_is_admin, only: %i[index edit update new create destroy]
 
   def index
     @users = User.all
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'Profile was successfully created.' }
+        format.html { redirect_to users_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'Profile was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'Profile was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -57,6 +58,6 @@ class UsersController < ApplicationController
   end
 
   def profile_params
-    params.require(:user).permit(:first_name, :last_name, :image)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin, :image)
   end
 end

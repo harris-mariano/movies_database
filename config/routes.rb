@@ -7,9 +7,16 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :users do
-    delete :remove_from_favorites, param: :movie_id
+  resources :users, except: %i[create update] do
+    collection do
+      post 'create_user' => 'users#create', as: :create_user
+    end
+
+    member do
+      patch 'update_user' => 'users#update', as: :update_user
+    end
   end
+
 
   resources :actors do
     post :create_cast
