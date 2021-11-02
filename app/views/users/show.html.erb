@@ -10,9 +10,9 @@
       <h3>User Details</h3>
       <p><strong>Full Name:</strong> <%= @user.first_name + " " + @user.last_name %></p>
       <p><strong>Email:</strong> <%= @user.email %></p>
-      <% if current_user == @user || current_user.admin? %>
+      <% if current_user == @user %>
         <p>
-          <%= link_to "Edit profile", edit_profile_path(@user), class: "btn btn-primary", role: "button" %>
+          <%= link_to "Edit profile", edit_user_path(@user), class: "btn btn-primary", role: "button" %>
         </p>
       <% end %>
     </div>

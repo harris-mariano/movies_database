@@ -1,31 +1,31 @@
 # frozen_string_literal: true
 
 # controller for user profiles
-class ProfilesController < ApplicationController
-  before_action :set_profile, only: %i[show edit update destroy]
+class UsersController < ApplicationController
+  before_action :set_user, only: %i[show edit update destroy]
 
   def index
-    @profiles = Profile.all
+    @users = User.all
   end
 
   def show; end
 
   def new
-    @profile = Profile.new
+    @user = User.new
   end
 
   def edit; end
 
   def create
-    @profile = Profile.new(profile_params)
+    @user = User.new(profile_params)
 
     respond_to do |format|
-      if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
-        format.json { render :show, status: :created, location: @profile }
+      if @user.save
+        format.html { redirect_to @user, notice: 'Profile was successfully created.' }
+        format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -33,7 +33,7 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(profile_params)
-        format.html { redirect_to profile_path(@user), notice: 'Profile was successfully updated.' }
+        format.html { redirect_to user_path(@user), notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -43,16 +43,16 @@ class ProfilesController < ApplicationController
   end
 
   def destroy
-    @profile.destroy
+    @user.destroy
     respond_to do |format|
-      format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'Profile was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
 
-  def set_profile
+  def set_user
     @user = User.find(params[:id])
   end
 

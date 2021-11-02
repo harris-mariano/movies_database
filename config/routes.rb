@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :profiles do
+  resources :users do
     delete :remove_from_favorites, param: :movie_id
   end
 

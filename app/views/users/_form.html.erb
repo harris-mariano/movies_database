@@ -1,6 +1,6 @@
 <div class="container">
   <h4 class="mb-3">Edit Profile</h4>
-  <%= form_with url: profile_path, model: user, method: :patch, class: "needs-validation" do |f| %>
+  <%= form_with url: user_path, model: user, method: :patch, class: "needs-validation" do |f| %>
     <div class="row">
       <div class="col-md-6 mb-3">
         <%= f.label :first_name %>
