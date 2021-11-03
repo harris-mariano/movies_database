@@ -4,16 +4,20 @@
       <h3 class="h6">Casts</h3>
     </header>
     <div class="blog-posts">
-      <% @movie.casts.each do |cast| %>
-        <%= link_to cast.actor do %>
-          <div class="item d-flex align-items-center">
-            <div class="image"><%= image_tag cast.actor.image.url(:thumb), class: "img-fluid" %></div>
-            <div class="title">
-              <%= cast.actor.full_name %> as
-              <strong><%= cast.character_name %></strong>
+      <% if @movie.casts.any? %>
+        <% @movie.casts.each do |cast| %>
+          <%= link_to cast.actor do %>
+            <div class="item d-flex align-items-center">
+              <div class="image"><%= image_tag cast.actor.image.url(:thumb), class: "img-fluid" %></div>
+              <div class="title">
+                <%= cast.actor.full_name %> as
+                <strong><%= cast.character_name %></strong>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
+      <% else %>
+        <p>No casts yet.</p>
       <% end %>
     </div>
   </div>
