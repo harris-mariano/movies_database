@@ -18,8 +18,8 @@
           <p><%= review.comment %></p>
           <p><i class="fas fa-star" style="color: green"></i> <%= review.score %></p>
           <div class="row">
-            <%=link_to "Edit", edit_movie_review_path(@movie, review), class: "btn btn-sm btn-warning" %> |
-            <%= button_to "Delete", movie_review_path(@movie, review), method: :delete, class: "btn btn-sm btn-danger float-right" %>
+            <%= link_to "Edit", edit_movie_review_path(@movie, review), class: "btn btn-sm btn-warning" %> |
+            <%= button_to "Delete", movie_review_path(@movie, review), method: :delete, class: "btn btn-sm btn-danger float-right", data: { confirm: ("Are you sure?") } %>
           </div>
         </div>
       </div>

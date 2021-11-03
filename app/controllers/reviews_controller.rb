@@ -6,10 +6,6 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: %i[show edit update destroy]
   before_action :ensure_user_is_owner_or_admin, only: %i[edit update destroy]
 
-  def new
-    @review = current_user.reviews.new
-  end
-
   def create
     @review = current_user.reviews.new(review_params)
 
@@ -18,7 +14,7 @@ class ReviewsController < ApplicationController
         format.html { redirect_to movie_path(@movie), notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render 'movies/show', status: :unprocessable_entity }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
@@ -37,7 +33,7 @@ class ReviewsController < ApplicationController
         format.html { redirect_to movie_path(@movie), notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render 'movies/show', status: :unprocessable_entity }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end

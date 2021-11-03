@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :favorites, dependent: :destroy
   has_many :movies, through: :favorites
-  has_attached_file :image, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
+  has_attached_file :image, styles: { medium: '300x300', thumb: '100x100' }, default_url: '/images/:style/missing.png'
 
   # validations
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/

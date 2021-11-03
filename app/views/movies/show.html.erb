@@ -1,7 +1,18 @@
+<% if @review.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+    <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="container">
   <div class="row">
-    <!-- Latest Posts -->
-    <main class="post blog-post col-lg-12 no-padding-bottom">
+    <main class="post blog-post col-md-8 no-padding-bottom">
       <div class="container">
         <div class="post-single">
           <div class="post-thumbnail"><%= image_tag @movie.image.url(:medium), class: "img-fluid" %></div>
@@ -45,5 +56,6 @@
       </div>
     </main>
 
+    <%= render 'movies/casts' %>
   </div>
 </div>

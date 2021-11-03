@@ -1,0 +1,20 @@
+<aside class="col-md-4">
+  <div class="widget latest-posts">
+    <header>
+      <h3 class="h6">Casts</h3>
+    </header>
+    <div class="blog-posts">
+      <% @movie.casts.each do |cast| %>
+        <%= link_to cast.actor do %>
+          <div class="item d-flex align-items-center">
+            <div class="image"><%= image_tag cast.actor.image.url(:thumb), class: "img-fluid" %></div>
+            <div class="title">
+              <%= cast.actor.full_name %> as
+              <strong><%= cast.character_name %></strong>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</aside>

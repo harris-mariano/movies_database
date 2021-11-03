@@ -3,8 +3,7 @@
 # controller for movies
 class MoviesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
-  before_action :ensure_user_is_admin, except: %i[index show add_to_favorites remove_from_favorites]
-  before_action :set_movie, only: %i[show edit update destroy]
+  before_action :set_movie, only: %i[show]
 
   def index
     @q = Movie.order(created_at: :desc).ransack(params[:q])
@@ -13,61 +12,6 @@ class MoviesController < ApplicationController
 
   def show
     @review = current_user&.reviews&.new
-  end
-
-  def new
-    @movie = Movie.new
-  end
-
-  def edit; end
-
-  def create
-    @movie = Movie.new(movie_params)
-
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to movies_path, notice: 'Movie was successfully created.' }
-        format.json { render :show, status: :created, location: @movie }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @movie.update(movie_params)
-        format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
-        format.json { render :show, status: :ok, location: @movie }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @movie.destroy
-    respond_to do |format|
-      format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  def create_cast
-    @movie = Movie.find params[:movie_id]
-    @movie.casts.build(actor_id: params[:actor_id])
-
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully added to this actor.' }
-        format.json { render :show, status: :created, location: @movie }
-      else
-        format.html { render :show, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def add_to_favorites
@@ -92,9 +36,5 @@ class MoviesController < ApplicationController
 
   def set_movie
     @movie = Movie.find(params[:id])
-  end
-
-  def movie_params
-    params.require(:movie).permit(:title, :release_year, :genre, :director, :story, :image)
   end
 end
