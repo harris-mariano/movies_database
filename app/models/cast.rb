@@ -6,5 +6,5 @@ class Cast < ApplicationRecord
   belongs_to :actor
 
   # validations
-  validates :movie_id, :actor_id, presence: true
+  validates :movie_id, :actor_id, :character_name, presence: true
 end
