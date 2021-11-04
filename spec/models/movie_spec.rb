@@ -3,24 +3,39 @@
 require 'rails_helper'
 
 RSpec.describe Movie, type: :model do
-  it 'attributes should not be blank' do
-    movie = Movie.new
+  let(:movie) { build(:movie) }
 
-    expect(movie).to be_invalid
-    expect(movie.errors[:title]).to be_any
-    expect(movie.errors[:release_year]).to be_any
-    expect(movie.errors[:genre]).to be_any
-    expect(movie.errors[:director]).to be_any
-    expect(movie.errors[:summary]).to be_any
-    expect(movie.errors[:image]).to be_any
-
-    movie.title = 'sample title'
-    movie.release_year = '2020'
-    movie.genre = 'action'
-    movie.director = 'harris'
-    movie.summary = 'summary'
-    movie.image = fixture_file_upload(Rails.root.join('spec', 'photos', 'maze_runner.jpg'))
-
+  it 'is valid with valid attributes' do
     expect(movie).to be_valid
+  end
+
+  it 'is not valid without title' do
+    movie.title = nil
+    expect(movie).to be_invalid
+  end
+
+  it 'is not valid without release_year' do
+    movie.release_year = nil
+    expect(movie).to be_invalid
+  end
+
+  it 'is not valid without genre' do
+    movie.genre = nil
+    expect(movie).to be_invalid
+  end
+
+  it 'is not valid without director' do
+    movie.director = nil
+    expect(movie).to be_invalid
+  end
+
+  it 'is not valid without story' do
+    movie.story = nil
+    expect(movie).to be_invalid
+  end
+
+  it 'is not valid without image' do
+    movie.image = nil
+    expect(movie).to be_invalid
   end
 end

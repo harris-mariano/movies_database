@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :cast do
-    movie { nil }
-    actor { nil }
+    movie
+    actor
+    character_name { 'Superman' }
   end
 end

@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :review do
-    movie { nil }
-    comment { "MyText" }
-    score { 1 }
+    movie
+    user
+    comment { 'Sample comment' }
+    score { 5 }
   end
 end
