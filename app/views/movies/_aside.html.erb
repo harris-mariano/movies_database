@@ -5,7 +5,7 @@
     </header>
     <%= search_form_for @q, class: "search-form" do |f| %>
       <div class="form-group">
-        <%= f.search_field :title_or_genre_cont, placeholder: "What are you looking for?" %>
+        <%= f.search_field :title_or_genre_or_release_year_or_director_cont, placeholder: "What are you looking for?" %>
         <%= f.button class: "submit", type: "submit" do %>
           <i class="icon-search"></i>
         <% end %>
