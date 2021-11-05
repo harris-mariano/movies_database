@@ -1,4 +1,8 @@
 # frozen_string_literal: true
+# This should really be part of ActiveRecord, but it isn't :(
+if ActiveRecord::Base.connection.instance_variable_get(:@config)[:encoding] == 'utf8mb4'
+  ActiveRecord::ConnectionAdapters::AbstractMysqlAdapter::NATIVE_DATABASE_TYPES[:string][:limit] = 191
+end
 
 class DeviseCreateUsers < ActiveRecord::Migration[6.0]
   def change
@@ -38,8 +42,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.timestamps null: false
     end
 
-    add_index :users, :email, limit: 191, unique: true
-    add_index :users, :reset_password_token, limit: 191, unique: true
+    add_index :users, :email, unique: true
+    add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end
