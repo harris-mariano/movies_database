@@ -21,7 +21,7 @@
       <% Movie.first(5).each do |movie| %>
         <%= link_to movie do %>
           <div class="item d-flex align-items-center">
-            <div class="image"><%= image_tag movie.image.url(:thumb), class: "img-fluid" %></div>
+            <div class="image"><%= image_tag movie.image.url, class: "img-fluid" %></div>
             <div class="title">
               <strong><%= movie.title %></strong>
               <div class="d-flex align-items-center">

@@ -752,6 +752,7 @@ section.featured-posts .image {
 
 section.featured-posts .image img {
   height: 100%;
+  width: 475px;
 }
 
 section.featured-posts .post-header {
@@ -1323,6 +1324,7 @@ main.posts-listing .post-footer {
 .blog-post .post-thumbnail img {
   width: 100%;
   margin-bottom: 10px;
+  height: 440px;
 }
 
 .blog-post h1 {
@@ -2642,4 +2644,8 @@ a.text-dark:focus, a.text-dark:hover {
 }
 .icon-eye:before {
   content: "\63";
+}
+
+.posts-listing .post-thumbnail .img-fluid {
+  height: 250px;
 }

@@ -4,11 +4,10 @@
     <main class="posts-listing col-lg-8">
       <div class="container">
         <div class="row">
-
           <% @movies.each do |movie| %>
             <div class="post col-xl-6">
               <div class="post-thumbnail">
-                <%= link_to (image_tag movie.image.url(:medium), class: "img-fluid"), movie %>
+                <%= link_to (image_tag movie.image.url, class: "img-fluid"), movie %>
               </div>
 
               <div class="post-details">

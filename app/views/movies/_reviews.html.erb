@@ -8,7 +8,7 @@
       <div class="comment">
         <div class="comment-header d-flex justify-content-between">
           <div class="user d-flex align-items-center">
-            <div class="image"><%= image_tag review.user.image.url(:medium), class: "img-fluid rounded-circle" %></div>
+            <div class="image"><%= image_tag review.user.image.blank? ? "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" : review.user.image.url, class: "img-fluid rounded-circle" %></div>
             <div class="title"><strong><%= review.user.first_name %> <%= review.user.last_name %></strong><span class="date"><%= review.created_at.strftime('%B %Y') %></span></div>
           </div>
 

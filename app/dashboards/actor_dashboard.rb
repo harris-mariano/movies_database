@@ -15,8 +15,7 @@ class ActorDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     image: Field::Paperclip.with_options(
-      thumbnail_style: 'thumb',
-      big_style: 'medium'
+      thumbnail_style: 'original'
     )
   }.freeze
 
@@ -49,8 +48,6 @@ class ActorDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     full_name
-    casts
-    movies
     image
   ].freeze
 

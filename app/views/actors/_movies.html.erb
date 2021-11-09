@@ -7,7 +7,7 @@
       <% @actor.casts.each do |cast| %>
         <%= link_to cast.movie do %>
           <div class="item d-flex align-items-center">
-            <div class="image"><%= image_tag cast.movie.image.url(:thumb), class: "img-fluid" %></div>
+            <div class="image"><%= image_tag cast.movie.image.url, class: "img-fluid" %></div>
             <div class="title">
               <strong><%= cast.movie.title %></strong>
               <div class="d-flex align-items-center">

@@ -8,7 +8,7 @@
         <% @movie.casts.each do |cast| %>
           <%= link_to cast.actor do %>
             <div class="item d-flex align-items-center">
-              <div class="image"><%= image_tag cast.actor.image.url(:thumb), class: "img-fluid" %></div>
+              <div class="image"><%= image_tag cast.actor.image.url, class: "img-fluid" %></div>
               <div class="title">
                 <%= cast.actor.full_name %> as
                 <strong><%= cast.character_name %></strong>

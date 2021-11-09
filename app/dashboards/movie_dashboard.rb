@@ -17,8 +17,7 @@ class MovieDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     image: Field::Paperclip.with_options(
-      thumbnail_style: 'thumb',
-      big_style: 'medium'
+      thumbnail_style: 'original'
     ),
     casts: Field::HasMany,
     actors: Field::HasMany,
