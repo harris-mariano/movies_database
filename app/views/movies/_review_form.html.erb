@@ -6,7 +6,7 @@
   <% if user_signed_in? %>
     <%= form_with model: [@movie, @review], class: "" do |f| %>
       <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-2">
           <%= f.label :score, class: "form-label" %>
           <%= f.select :score, (1..5).map { |i| [i, i] }, { include_blank: true }, class: "form-control" %>
         </div>
