@@ -30,16 +30,5 @@ RSpec.describe '/movies', type: :request do
       get movie_url(movie)
       expect(response).to be_successful
     end
-
-    it 'should be added and removed to user favorites' do
-      login(user)
-      get movie_url(movie)
-      expect {
-        post movie_add_to_favorites_url(movie)
-      }.to change(Favorite, :count).by(1)
-      expect {
-        delete movie_remove_from_favorites_url(movie)
-      }.to change(Favorite, :count).by(-1)
-    end
   end
 end

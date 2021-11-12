@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   resources :movies, only: %i[index show] do
     resources :reviews, except: %i[index new show]
-    post :add_to_favorites
-    delete :remove_from_favorites
+    post :add_to_favorites, to: 'favorites#add_to_favorites'
+    delete :remove_from_favorites, to: 'favorites#remove_from_favorites'
   end
 
   resources :actors, only: %i[show]
