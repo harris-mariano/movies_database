@@ -18,7 +18,7 @@
       <h3 class="h6">Latest Movies</h3>
     </header>
     <div class="blog-posts">
-      <% Movie.first(5).each do |movie| %>
+      <% Movie.order(created_at: :desc).first(5).each do |movie| %>
         <%= link_to movie do %>
           <div class="item d-flex align-items-center">
             <div class="image"><%= image_tag movie.image.url, class: "img-fluid" %></div>
